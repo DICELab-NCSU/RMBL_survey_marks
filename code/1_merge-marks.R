@@ -7,7 +7,6 @@
 library(tidyverse)
 library(sf)
 library(lubridate)
-library(stars)
 
 theme_set(theme_bw(base_size = 18)+
             theme(panel.grid = element_blank(),
@@ -104,11 +103,11 @@ current_monuments_recover <- current_monuments %>%
 cyear <- year(today())
 
 # current release (main directory)
-write_sf(current_monuments, paste0(cyear, "_mark-points.geojson"), append = FALSE)
+write_sf(current_monuments_recover, paste0(cyear, "_mark-points.geojson"), append = FALSE)
 
 # archive copy
 dir.create(paste0("old_releases/", cyear))
-write_sf(current_monuments, paste0("old_releases/", cyear, "/", cyear,
+write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear,
                                    "_mark-points.geojson"),
          append = FALSE)
 
@@ -117,3 +116,12 @@ aoi <- st_buffer(current_monuments, dist = 10000) %>%
   st_as_sfc()
 write_sf(aoi, "utilities/AOI.geojson")
 write_sf(aoi, "utilities/AOI.shp")
+
+##################################################-
+## Rename viewshed rasters ----
+##################################################-
+for(i in 1:nrow(current_monuments_recover)){
+  old <- paste0("raw-viewsheds/viewshed_", i - 1, ".tif")
+  new <- paste0("raw-viewsheds/", current_monuments_recover$name[i], ".tif")
+  file.rename(from = old, to = new)
+}
