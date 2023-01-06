@@ -1,0 +1,10 @@
+recovery_date, mark_name, recovered_by, found_mark, type, stability, condition
+2022-06-12, Gothic 3GPS, W Petry, TRUE, disc with concrete anchor, moderate, good
+2022-06-12, Gothic 4GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
+2022-06-12, Gothic 11GPS_RTK, W Petry, TRUE, disc with concrete anchor, moderate, good
+2022-06-13, Gothic 7GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
+2022-06-13, Gothic 5GPS, W Petry, TRUE, disc on rebar rod, low, good
+2022-06-13, Gothic 1GPS, W Petry, TRUE, disc on rebar rod, low, good
+2022-06-18, Gothic 2GPS, W Petry, TRUE, disc on bedrock, high, good
+2022-07-15, Gothic 10GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
+2022-09-09, MexCut 13GPS, W Petry, TRUE, disc on bedrock, high, good
