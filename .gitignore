@@ -56,3 +56,9 @@ _archive/
 raw-marks/
 raw-viewsheds/
 elevation/
+
+# QGIS document
+*.qgz
+
+# 11km viewsheds
+*11km*

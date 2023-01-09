@@ -17,9 +17,9 @@ theme_set(theme_bw(base_size = 18)+
 ##################################################-
 ## Create viewsheds ----
 ##################################################-
-current_viewsheds <- tibble(file = list.files("raw-viewsheds", pattern = "\\.tif$",
+current_viewsheds <- tibble(file = list.files("raw-viewsheds", pattern = ".*8km.tif$",
                                               full.names = TRUE)) %>%
-  mutate(name = str_extract(file, "\\/(.*)\\.tif", group = 1),
+  mutate(name = str_extract(file, "\\/(.*)-8km\\.tif", group = 1),
          viewshed = map(.x = file,
                         .f = ~read_stars(.x) %>%
                           st_as_sf(., as_points = FALSE, merge = TRUE) %>%
@@ -34,4 +34,4 @@ current_viewsheds <- tibble(file = list.files("raw-viewsheds", pattern = "\\.tif
 ggplot(current_viewsheds, aes(fill = name))+
   geom_sf()
 
-st_write(current_viewsheds, paste0(year(today()), "mark-viewsheds.geojson"))
+st_write(current_viewsheds, paste0(year(today()), "mark-viewsheds-8km.geojson"))

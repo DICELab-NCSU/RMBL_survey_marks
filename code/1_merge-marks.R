@@ -121,7 +121,7 @@ write_sf(aoi, "utilities/AOI.shp")
 ## Rename viewshed rasters ----
 ##################################################-
 for(i in 1:nrow(current_monuments_recover)){
-  old <- paste0("raw-viewsheds/viewshed_", i - 1, ".tif")
-  new <- paste0("raw-viewsheds/", current_monuments_recover$name[i], ".tif")
+  old <- paste0("raw-viewsheds/viewshed_8km_", i - 1, ".tif")
+  new <- paste0("raw-viewsheds/", current_monuments_recover$name[i], "-8km.tif")
   file.rename(from = old, to = new)
 }
