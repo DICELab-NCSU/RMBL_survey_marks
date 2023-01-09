@@ -19,23 +19,23 @@ Who attempted to recover the mark: [First initial and last name]
 Mark was found: [TRUE/FALSE]
 
 Mark type (add an 'x' inside one set of square brackets below):
-[ ] UNKNOWN
-[ ] disc on bedrock
-[ ] disc with concrete anchor
-[ ] disc on rebar rod
-[ ] magnail in bedrock
-[ ] other
+- [ ] UNKNOWN
+- [ ] disc on bedrock
+- [ ] disc with concrete anchor
+- [ ] disc on rebar rod
+- [ ] magnail in bedrock
+- [ ] other
 
 Stability:
-[ ] high
-[ ] medium
-[ ] low
+- [ ] high
+- [ ] medium
+- [ ] low
 
 Condition (good/poor/destroyed/presumed buried):
-[ ] found - good
-[ ] found - poor
-[ ] not found - destroyed
-[ ] not found - presumed buried
-[ ] not found - other
+- [ ] found - good
+- [ ] found - poor
+- [ ] not found - destroyed
+- [ ] not found - presumed buried
+- [ ] not found - other
 
 Notes: [optional to clarify 'other' responses above or to add additional information about the recovery attempt; write 'NA' if none]
