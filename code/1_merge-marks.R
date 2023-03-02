@@ -100,12 +100,11 @@ current_monuments_recover <- current_monuments %>%
 ##################################################-
 ## Write out ----
 ##################################################-
-cyear <- year(today())
-
 # current release (main directory)
-write_sf(current_monuments_recover, paste0(cyear, "_mark-points.geojson"), append = FALSE)
+write_sf(current_monuments_recover, "current_mark-points.geojson", append = FALSE)
 
 # archive copy
+cyear <- year(today())
 dir.create(paste0("old_releases/", cyear))
 write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear,
                                    "_mark-points.geojson"),
