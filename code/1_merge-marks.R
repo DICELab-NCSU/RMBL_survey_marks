@@ -73,7 +73,7 @@ current_monuments <- list(petry_2022, mexcut_mon, gothic_local06) %>%
          lat_dd = unname(coords[,2]),
          lon_dd = unname(coords[,1])) %>%
   select(-coords) %>%
-  st_transform(crs = 26913) # metric projection, matches DEM
+  st_transform(crs = 32613) # metric projection, matches DEM
 
 ggplot(current_monuments)+
   geom_sf()
