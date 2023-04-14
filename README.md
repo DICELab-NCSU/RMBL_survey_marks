@@ -32,9 +32,15 @@ Survey marks in this database vary tremendously in...
 Only one base GNSS receiver can occupy a given mark at a time, creating the potential for conflict if multiple users want to use the same base location. For RMBL-established marks, we suggest that you communicate with the Science Director about your use plan. Depending on equipment setups, it may be possible for multiple researchers to use the same correction stream from a single base. For marks established by an individual, we suggest contacting that individual to coordinate use of the mark. In most cases, the individual established the mark for their use in a particular location for which other exisiting marks were unsuitable, and it is included under their name on the Current Research Map. If you have set a mark, please ask that it be included on the Current Research Map under your name for as long as you are actively using it.
 
 ## Releases and update schedule
-The tentative plan is to perform a major release each spring with the release version corresponding to the summer field season of intended use (e.g., `v.YYYY.0`). Additions of viewsheds corresponding to new marks and deletions of viewsheds corresponding to unusable marks will only occur for major releases. Minor versions will focus on additions/subtractions to the mark points and updating of mark recovery/condition reports.
+The tentative plan is to relase a major version update once per year with minor releases on an irregular, as-needed basis. Major versions will be prepared during the low season of field station activity (September-May). The semantic versioning scheme will follow the pattern `vYYYY.m`. `YYYY` corresponds to the calendar year of *upcoming* growing season for which the major release is intended for use.  `m` is the minor release version, which starts at 0 and increments by 1 for each minor release version.
 
-All marks that are thought to be in working order are available in `current_mark-points.geojson`.
+| Update                     | Major | Minor |
+| -------------------------- |------ |------ |
+| Survey mark additions      | x     | x     |
+| Error corrections          | x     | x     |
+| Refined mark positions     | x     |       |
+| Updated viewshed           | x     |       |
+| Recovery/condition reports | x     |       |
 
 ## Submit a mark recovery attempt report
 If you visit a survey mark, please consider submitting a [mark recovery attempt report](https://github.com/DICELab-NCSU/RMBL_survey_marks/issues/new?assignees=&labels=recovery-report&template=contribute-mark-recovery-attempt.md&title=Recovery+attempt%3A+%5Bmark+name%5D) (links to an Issues template for this repository). Survey marks can move or be damaged and destroyed, rendering them inaccurate or unusable. These reports will be used to update the condition columns associated with each survey mark on an annual basis during the fall/winter/spring.
