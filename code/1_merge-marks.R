@@ -43,8 +43,8 @@ mexcut_mon <- read_sf("raw-marks/MEXCUT_MON/MEXCUT_MON.shp") |>
          stability = NA_character_,
          condition = NA_character_)
 
-# PETRY_2022
-petry_2022 <- read_csv("raw-marks/PETRY_2022/Benchmarks 2022.csv") |>
+# PETRY
+petry <- read_csv("raw-marks/PETRY/Survey Marks.csv") |>
   drop_na(Longitude, Latitude) |>
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) |>
   rename(name = Name) |>
@@ -53,7 +53,7 @@ petry_2022 <- read_csv("raw-marks/PETRY_2022/Benchmarks 2022.csv") |>
   group_by(name) |>
   slice(1) |>
   ungroup() |>
-  mutate(installed = 2022L,
+  mutate(installed = year(ymd_hms(`Averaging start`)),
          installer = "W Petry",
          type = "magnail in bedrock",
          position_quality = case_when(
@@ -67,7 +67,7 @@ petry_2022 <- read_csv("raw-marks/PETRY_2022/Benchmarks 2022.csv") |>
 ##################################################-
 ## Merge & unify metadata ----
 ##################################################-
-current_monuments <- list(petry_2022, mexcut_mon, gothic_local06) %>%
+current_monuments <- list(petry, mexcut_mon, gothic_local06) %>%
   do.call(bind_rows, .) %>%
   mutate(coords = st_coordinates(.),
          lat_dd = unname(coords[,2]),
@@ -113,8 +113,8 @@ write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear,
 aoi <- st_buffer(current_monuments, dist = 10000) %>%
   st_bbox() %>%
   st_as_sfc()
-write_sf(aoi, "utilities/AOI.geojson")
-write_sf(aoi, "utilities/AOI.shp")
+write_sf(aoi, "utilities/AOI.geojson", append = FALSE)
+write_sf(aoi, "utilities/AOI.shp", append = FALSE)
 
 ##################################################-
 ## Rename viewshed rasters ----
