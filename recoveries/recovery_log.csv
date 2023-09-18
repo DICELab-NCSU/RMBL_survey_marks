@@ -1,10 +1,23 @@
-recovery_date, mark_name, recovered_by, found_mark, type, stability, condition
-2022-06-12, Gothic 3GPS, W Petry, TRUE, disc with concrete anchor, moderate, good
-2022-06-12, Gothic 4GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
-2022-06-12, Gothic 11GPS_RTK, W Petry, TRUE, disc with concrete anchor, moderate, good
-2022-06-13, Gothic 7GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
-2022-06-13, Gothic 5GPS, W Petry, TRUE, disc on rebar rod, low, good
-2022-06-13, Gothic 1GPS, W Petry, TRUE, disc on rebar rod, low, good
-2022-06-18, Gothic 2GPS, W Petry, TRUE, disc on bedrock, high, good
-2022-07-15, Gothic 10GPS, W Petry, FALSE, UNKNOWN, UNKNOWN, presumed buried
-2022-09-09, MexCut 13GPS, W Petry, TRUE, disc on bedrock, high, good
+recovery_date,mark_name,recovered_by,found_mark,type,stability,condition,comments
+2022-06-12,Gothic 3GPS,W Petry,TRUE,disc with concrete anchor,medium,good,NA
+2022-06-12,Gothic 4GPS,W Petry,FALSE,UNKNOWN,UNKNOWN,presumed buried,NA
+2022-06-12,Gothic 11GPS_RTK,W Petry,TRUE,disc with concrete anchor,medium,good,NA
+2022-06-13,Gothic 7GPS,W Petry,FALSE,UNKNOWN,UNKNOWN,presumed buried,NA
+2022-06-13,Gothic 5GPS,W Petry,TRUE,disc on rebar rod,low,good,NA
+2022-06-13,Gothic 1GPS,W Petry,TRUE,disc on rebar rod,low,good,NA
+2022-06-18,Gothic 2GPS,W Petry,TRUE,disc on bedrock,high,good,NA
+2022-07-15,Gothic 10GPS,W Petry,FALSE,UNKNOWN,UNKNOWN,presumed buried,NA
+2022-09-09,MexCut 13GPS,W Petry,TRUE,disc on bedrock,high,good,NA
+2023-06-11,Gothic 11GPS_RTK,W Petry,TRUE,disc with concrete anchor,high,good,NA
+2023-06-22,Bellview Base,W Petry,TRUE,magnail in buried boulder,high,good,NA
+2023-06-22,Central East River Valley,W Petry,TRUE,magnail in bedrock,high,good,NA
+2023-07-27,Brush Creek Hill,W Petry,TRUE,magnail in buried boulder,medium,good,NA
+2023-07-29,Burro Park,W Petry,TRUE,magnail in bedrock,high,good,NA
+2023-08-03,Paonia B,W Petry,TRUE,magnail in buried boulder,medium,good,NA
+2023-08-09,MexCut 13GPS,W Petry,TRUE,disc on bedrock,high,good,NA
+2023-08-10,Cement Creek,W Petry,TRUE,magnail in buried boulder,medium,good,NA
+2023-08-15,Lily Lake TH,W Petry,TRUE,magnail in buried boulder,medium,good,NA
+2023-08-23,East Maroon Pass,W Petry,TRUE,pit in buried boulder,medium,poor,suitable for near-term use; not permanent
+2023-08-31,Bellview II,W Petry,TRUE,magnail in bedrock,high,good,NA
+2023-08-31,Emerald Lake,W Petry,TRUE,magnail in bedrock,high,good,NA
+2023-09-09,Gothic Baldy Saddle,W Petry,TRUE,magnail in buried boulder,medium,good,NA
