@@ -22,7 +22,7 @@ Radio waves of the frequencies typically used for communication between GNSS rec
 
 3. Is the survey mark suitable for the mapping application?
 Survey marks in this database vary tremendously in...
-- Accessibility from roads/trails: Accessibility can be a positive if it means that it's easier for your field crew to get a base receiver set up on the survey mark. Accessibility can become a liability if it means that you have to leave GNSS equipment unattended in a high traffic area where it is prone to disturbance from curious passersby or to theft.
+- Accessibility from roads/trails: Accessibility can be a positive if it means that it's easier for your field crew to get a base receiver set up on the survey mark. Accessibility can become a liability if it means that you have to leave GNSS equipment unattended in a high traffic area where it is prone to disturbance from curious passersby or, worse, theft.
 
 - Stability of the physical mark: Survey marks can be moved from their mapped location by physical processes like freeze/thaw cycles and slides of snow, earth, and rock. Information about the mark construction and most recent reported stability is provided in the database. Again, the survey mark to be used should be scouted for stability prior to operational use.
 
@@ -31,7 +31,7 @@ Survey marks in this database vary tremendously in...
 ## Suggested etiquette for mark use
 Only one base GNSS receiver can occupy a given mark at a time, creating the potential for conflict if multiple users want to use the same base location. For RMBL-established marks, we suggest that you communicate with the Science Director about your use plan. Depending on equipment setups, it may be possible for multiple researchers to use the same correction stream from a single base. For marks established by an individual, we suggest contacting that individual to coordinate use of the mark. In most cases, the individual established the mark for their use in a particular location for which other exisiting marks were unsuitable, and it is included under their name on the Current Research Map. If you have set a mark, please ask that it be included on the Current Research Map under your name for as long as you are actively using it.
 
-Conflicts can also arise if multiple bases are broadcasting RTK corrections on the same frequency. It's good practice to change the frequency your team uses to something different from the out-of-the-box default to minimize potential conflicts. The Science Director may have information on other researchers operating base stations near your research sites and may be able ot help facilitate coordination between teams.
+Conflicts can also arise if multiple bases are broadcasting RTK corrections on the same frequency. It's good practice to change the frequency your team uses to something different from the out-of-the-box default to minimize potential conflicts. The Science Director may have information on other researchers operating base stations near your research sites and may be able to help facilitate coordination between teams.
 
 Longer term, there may be opportunites to set up a (semi)permanent base unit to broadcast corrections that cover a broad set of research sites with heavy demand for RTK. This will take a non-trivial amount of investment to set up and maintain. Alternatively, expansion of cellular data networks may allow wider use of new or existing web-based casters (e.g., [Mesa County RTVRN](https://www.mesacoumenty.us/departments-and-services/gis/gps-survey)).
 
@@ -52,11 +52,11 @@ If you visit a survey mark, please consider submitting a [mark recovery attempt 
 Users are encouraged to collect high precision position data during mark recovery attempts if they are able to do so. Most of the marks were established using older GPS/GNSS technologies and/or brief position recording durations. Collecting higher quality mark position data would enable a broader suite of research applications, especially as the RMBL Spatial Data Platform comes online. Please contact the maintainer of this database if you are interested in providing mark position data.
 
 ## Submit a record of a new mark
-The proceedure to submit a new mark is currently under development. Please contact Ian Breckheimer if you are considering setting a new mark to aid your research. If you have set a mark for your research and would like to contribute it to the database, please open an 'Issue' at the top of this page.
+The proceedure to submit a new mark is currently under development. Please contact the Science Director if you are considering setting a new mark to aid your research. Will Petry can offer tips for identifying a suitable location. If you have set a mark for your research and would like to contribute it to the database, please open an 'Issue' at the top of this page.
 
 ## Technical documentation
 ### 1. Viewshed analysis
-Viewsheds for each survey mark were estimated using the [Visibility Analysis](https://plugins.qgis.org/plugins/ViewshedAnalysis/) v.1.8 plug-in for QGIS v.3.28.2.
+Viewsheds for each survey mark were estimated using the [Visibility Analysis](https://plugins.qgis.org/plugins/ViewshedAnalysis/) v.1.8 plug-in for QGIS v.3.32 (Lima).
 
 #### 1.1. DEM pre-processing
 Elevation data were sourced from the [USGS 3DEP 1/3rd arc-second Digital Elevation Models](https://www.sciencebase.gov/catalog/item/4f70aa9fe4b058caae3f8de5). The files required are:
@@ -66,7 +66,7 @@ Elevation data were sourced from the [USGS 3DEP 1/3rd arc-second Digital Elevati
 - USGS_13_n40w107_20220216.tif
 - USGS_13_n40w108_20211208.tif
 
-These files were merged, warped to EPSG:26913, and cropped to the [area of interest](utilities/AOI.geojson) (also available as a Shapefile in [utilities](utilities)). The AOI is defined as the bounding box around the survey marks, each with a 10 km buffer.
+These files were merged, warped to EPSG:26913, and cropped to the [area of interest](utilities/AOI.geojson) (also available as a Shapefile in [utilities](utilities)). The AOI is defined as the bounding box that encompasses the set of 10km-buffered survey marks.
 
 #### 1.2. Calculating viewsheds
 The interface to the Visibility Analysis plug-in is via the QGIS Toolbox.
@@ -95,4 +95,5 @@ Atmospheric refraction: 0.13
 
 Combining multiple outputs: Addition
 
-
+### 2. Polygonizing viewsheds
+An R script for converting the raw viewsheds from raster to (multi)polygon is provided in `code/2_polygonize-viewsheds.R`. At this time, the output rasters are renamed manually prior to polygonization. If you know an efficient way to automate this through QGIS, please contact us/open an Issue.
