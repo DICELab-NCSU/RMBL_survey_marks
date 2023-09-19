@@ -105,8 +105,9 @@ write_sf(current_monuments_recover, "current_mark-points.geojson", append = FALS
 
 # archive copy
 cyear <- year(today())
+cvers <- 1
 dir.create(paste0("old_releases/", cyear))
-write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear,
+write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear, ".", cvers,
                                    "_mark-points.geojson"),
          append = FALSE)
 
@@ -119,8 +120,8 @@ write_sf(aoi, "utilities/AOI.shp", append = FALSE)
 ##################################################-
 ## Rename viewshed rasters ----
 ##################################################-
-for(i in 1:nrow(current_monuments_recover)){
-  old <- paste0("raw-viewsheds/viewshed_8km_", i - 1, ".tif")
-  new <- paste0("raw-viewsheds/", current_monuments_recover$name[i], "-8km.tif")
-  file.rename(from = old, to = new)
-}
+# for(i in 1:nrow(current_monuments_recover)){
+#   old <- paste0("raw-viewsheds/viewshed_8km_", i - 1, ".tif")
+#   new <- paste0("raw-viewsheds/", current_monuments_recover$name[i], "-8km.tif")
+#   file.rename(from = old, to = new)
+# }
