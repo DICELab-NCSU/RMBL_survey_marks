@@ -1,7 +1,6 @@
 ---
 title: "RMBL survey marks for RTK GNSS"
 output: github_document
-always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -22,6 +21,7 @@ Emlid provides a brief overview and animation demonstrating how RTK works [here]
 library(tidyverse)
 library(leaflet)
 library(sf)
+library(mapview)
 
 pts <- read_sf("current_mark-points.geojson") |>
   st_transform(crs = 4326) |>
@@ -35,8 +35,9 @@ pts <- read_sf("current_mark-points.geojson") |>
 m <- leaflet(data = pts) |>
   addProviderTiles(provider = "OpenTopoMap") |>
   addMarkers(lng = ~lon, lat = ~lat, label = ~name)
-m
+mapshot2(m, file = "utilities/overview-map.png")
 ```
+![Overview map of all survey mark points.](utilities/overview-map.png)
 
 ## Choosing an existing survey mark for your research site
 Four questions are useful when choosing a survey mark to use as a real-time base location:
