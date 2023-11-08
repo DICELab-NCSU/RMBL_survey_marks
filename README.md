@@ -46,9 +46,9 @@ works
 
 <figure>
 <img src="utilities/overview-map.png"
-alt="Overview map of all survey mark points" />
+alt="Overview map of all survey mark points." />
 <figcaption aria-hidden="true">Overview map of all survey mark
-points</figcaption>
+points.</figcaption>
 </figure>
 
 ## Choosing an existing survey mark for your research site
