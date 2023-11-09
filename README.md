@@ -3,7 +3,7 @@ RMBL survey marks for RTK GNSS
 
 > DISCLAIMER: All data provided here, including coordinates of survey
 > marks, are provided “as-is” and without any warranty of accuracy. The
-> data and associated physical markers are shared exclusively for
+> data and associated physical markers are intended for
 > non-commercial research purposes to scientists at the Rocky Mountain
 > Biological Laboratory and are categorically unfit for any other use
 > (including, but not limited to, professional land surveying). Please
