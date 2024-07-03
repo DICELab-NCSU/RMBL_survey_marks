@@ -3,7 +3,7 @@ RMBL survey marks for RTK GNSS
 
 > DISCLAIMER: All data provided here, including coordinates of survey
 > marks, are provided “as-is” and without any warranty of accuracy. The
-> data and associated physical markers are intended for
+> data and associated physical markers are shared exclusively for
 > non-commercial research purposes to scientists at the Rocky Mountain
 > Biological Laboratory and are categorically unfit for any other use
 > (including, but not limited to, professional land surveying). Please
@@ -202,9 +202,8 @@ of this page.
 
 ### 1. Viewshed analysis
 
-Viewsheds for each survey mark were estimated using the [Visibility
-Analysis](https://plugins.qgis.org/plugins/ViewshedAnalysis/) v.1.8
-plug-in for QGIS v.3.32 (Lima).
+Viewsheds for each survey mark were estimated using the [`viewscape`
+package](https://doi.org/10.32614/CRAN.package.viewscape) v.1.0.0.
 
 #### 1.1. DEM pre-processing
 
@@ -218,50 +217,26 @@ The files required are:
 - USGS_13_n40w107_20220216.tif
 - USGS_13_n40w108_20211208.tif
 
-These files were merged, warped to EPSG:26913, and cropped to the [area
+These files were merged, warped to EPSG:32613, and cropped to the [area
 of interest](utilities/AOI.geojson) (also available as a Shapefile in
 [utilities](utilities)). The AOI is defined as the bounding box that
 encompasses the set of 10km-buffered survey marks.
 
+The raster file for the DEM is not provided in this repo due to its
+large size.
+
 #### 1.2. Calculating viewsheds
 
-The interface to the Visibility Analysis plug-in is via the QGIS
-Toolbox.
+The code needed to reproduce the viewsheds is provided in
+`code/2_mk_viewsheds.R`. The observer locations are the
+[current_mark-points](current_mark-points.geojson), and we assume that
+the base and the rover are both on a 2m range pole or tripod. The stock
+LoRA antenna range for [Emlid RS2+](https://emlid.com/reachrs2/)) is 8km
+line-of-sight, but our testing with \[aftermarket high gain antennas\]
+(<https://aeromao.com/product/triangl-extended-range-antenna-kit/>)
+suggests that 11km LOS may be feasible under ideal conditions.
 
-###### 1.2.1. Create viewpoints \> Create viewpoints
+# Changelog
 
-Observer location(s): [2023_mark-points](2023_mark-points.geojson)
-
-Digital elevation model: \[cropped, warped DEM raster from previous
-step\]
-
-Radius of analysis, meters: 8000 (stock antenna range for [Emlid
-RS2](https://emlid.com/reachrs2/))
-
-Observer height, meters: 2.0
-
-Target height, meters: 2.0
-
-##### 1.2.2. Analysis \> Viewshed
-
-Analysis type: Binary viewshed
-
-Observer location(s): \[viewpoints from previous step\] (tick the 🔁
-symbol to generate a separate viewshed for each location)
-
-Digital elevation model: \[cropped, warped DEM raster from previous
-step\]
-
-Take into account Earth curvature: ✓
-
-Atmospheric refraction: 0.13
-
-Combining multiple outputs: Addition
-
-### 2. Polygonizing viewsheds
-
-An R script for converting the raw viewsheds from raster to
-(multi)polygon is provided in `code/2_polygonize-viewsheds.R`. At this
-time, the output rasters are renamed manually prior to polygonization.
-If you know an efficient way to automate this through QGIS, please
-contact us/open an Issue.
+- **2024-07-04**: Viewshed workflow was moved from QGIS to R for
+  efficiency.
