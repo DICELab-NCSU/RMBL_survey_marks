@@ -48,7 +48,7 @@ The distance between a base unit and the rover (the "baseline") must be short en
 Additional problems arise with long baselines because the satellite signals received by the base and rover may experience different distortions if they pass through different parts of the atmosphere. The loss of precision will typically be on the order of a few parts per million. For example, an RTK setup with a 6 ppm loss of precision and a 12 km (7.5 mile) baseline will have an additional 72 mm (2.8 inch) error on top of the unit's nominal positional error. A heuristic limit is to keep the baseline <10 km (6.2 miles) for GNSS receivers that only use the L1 signal band and <60 km (37 miles) for L1/L2/+ multi-band receivers [(source)](https://docs.emlid.com/reachrs2/rtk-quickstart/rtk-introduction#single-band-and-multi-band-receivers), although the precision tolerances of your project may dictate more stringent limits.
 
 2. Is there a clear line-of-sight between the survey mark and the entire area to be mapped?
-Radio waves of the frequencies typically used for communication between GNSS receivers cannot pass through obstacles like dense forests and mountains very well--they are absorbed or they are reflected. Radio wave propagation in complex field environments is very challenging to predict. A useful heuristic is to use the line-of-sight rule: if the base and rover antennas can "see" each other and are within their nominal range, a radio signal should reliably pass between them. This repository contains [line-of-sight viewsheds](2023_mark-viewsheds.geojson) for an 8 km radius around each survey mark. These represent *estimates* of where a pair of Emlid RS2 GNSS receivers could communicate using their out-of-the-box configuration. They are intended to aid in planning, and they should be validated in the field prior to operational use.
+Radio waves of the frequencies typically used for communication between GNSS receivers cannot pass through obstacles like dense forests and mountains very well--they are absorbed or they are reflected. Radio wave propagation in complex field environments is very challenging to predict. A useful heuristic is to use the line-of-sight rule: if the base and rover antennas can "see" each other and are within their nominal range, a radio signal should reliably pass between them. This repository contains [line-of-sight viewsheds](current_mark-viewsheds.geojson) for an 8 km radius around each survey mark. These represent *estimates* of where a pair of Emlid RS2 GNSS receivers could communicate using their out-of-the-box configuration. They are intended to aid in planning, and they should be validated in the field prior to operational use.
 
 3. Is the survey mark suitable for the mapping application?
 Survey marks in this database vary tremendously in...
@@ -107,11 +107,12 @@ of interest](utilities/AOI.geojson) (also available as a Shapefile in
 [utilities](utilities)). The AOI is defined as the bounding box that
 encompasses the set of 10km-buffered survey marks.
 
-The raster file for the DEM is not provided in this repo due to its large size.
+The raster file for the DEM is not provided in this repo due to its large size, however
+reproducible code is available in `code/2_merge-dem.R`.
 
 #### 1.2. Calculating viewsheds
 
-The code needed to reproduce the viewsheds is provided in `code/2_mk_viewsheds.R`. The 
+The code needed to reproduce the viewsheds is provided in `code/3_mk_viewsheds.R`. The 
 observer locations are the [current_mark-points](current_mark-points.geojson), and we assume 
 that the base and the rover are both on a 2m range pole or tripod. The stock LoRA antenna 
 range for [Emlid RS2+](https://emlid.com/reachrs2/)) is 8km line-of-sight, but our testing 

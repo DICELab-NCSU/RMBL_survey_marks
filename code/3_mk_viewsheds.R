@@ -22,15 +22,11 @@ theme_set(theme_bw(base_size = 18)+
 ##################################################-
 ## Load spatial data ----
 ##################################################-
-aoi <- read_sf("utilities/AOI.geojson")
 marks <- read_sf("current_mark-points.geojson")
-dem <- rast("~/polybox/Valeriana/spatial/elevation/WColorado_dem_1m.tif") |>
-  project(y = "epsg:32613", method = "cubic", threads = TRUE) |>
-  crop(aoi)
+dem <- rast("elevation/dem_aoi.tif")
 
 ggplot()+
   geom_spatraster(data = dem)+
-  geom_sf(data = aoi, fill = "transparent", color = "yellow")+
   scale_fill_whitebox_c("high_relief")
 
 ##################################################-
