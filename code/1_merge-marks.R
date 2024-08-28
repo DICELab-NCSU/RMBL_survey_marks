@@ -105,7 +105,7 @@ write_sf(current_monuments_recover, "current_mark-points.geojson", append = FALS
 
 # archive copy
 cyear <- year(today())
-cvers <- 2
+cvers <- 3
 dir.create(paste0("old_releases/", cyear))
 write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear, ".", cvers,
                                    "_mark-points.geojson"),

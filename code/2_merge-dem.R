@@ -46,10 +46,10 @@ dem_merged <- lapply(dem_files, rast) |>
   sprc() |>
   merge() |>
   project("epsg:32613", threads = TRUE) |>
-  crop(dem_merged, aoi)
+  crop(aoi)
 
 ggplot()+
   geom_spatraster(data = dem_merged)+
   scale_fill_whitebox_c("high_relief")
 
-writeRaster(dem_merged, "elevation/dem_aoi.tif")
+writeRaster(dem_merged, "elevation/dem_aoi.tif", overwrite = TRUE)
