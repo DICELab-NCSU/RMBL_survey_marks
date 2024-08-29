@@ -42,14 +42,9 @@ Emlid provides a brief overview and animation demonstrating how RTK
 works
 [here](https://docs.emlid.com/reachrs2/rtk-quickstart/rtk-introduction/).
 
-## Overview of existing marks
+## Maps of survey marks
 
-<figure>
-<img src="utilities/overview-map.png"
-alt="Overview map of all survey mark points." />
-<figcaption aria-hidden="true">Overview map of all survey mark
-points.</figcaption>
-</figure>
+![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
 
 ## Choosing an existing survey mark for your research site
 

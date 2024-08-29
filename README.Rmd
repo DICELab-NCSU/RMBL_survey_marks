@@ -16,28 +16,52 @@ Survey marks are most useful when position corrections are needed in real-time a
 
 Emlid provides a brief overview and animation demonstrating how RTK works [here](https://docs.emlid.com/reachrs2/rtk-quickstart/rtk-introduction/).
 
-## Overview of existing marks
+## Maps of survey marks
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(leaflet)
 library(sf)
-library(mapview)
+library(ggrepel)
+library(basemaps)
 
 pts <- read_sf("current_mark-points.geojson") |>
-  st_transform(crs = 4326) |>
-  rowwise() |>
-  mutate(lon = st_coordinates(geometry)[1, 1],
-         lat = st_coordinates(geometry)[1, 2]) |>
-  st_drop_geometry() |>
-  select(name, type, lon, lat) |>
-  ungroup()
+  st_transform(crs = 3857)
+bb <- st_buffer(pts, dist = 10000) |>
+  st_bbox() |>
+  st_as_sfc()
+bb_gothic <- filter(pts, name %in% c("MexCut 3GPS", "Snodgrass TH",
+                                     "East Maroon Pass")) |>
+  st_buffer(dist = 2000) |>
+  st_bbox() |>
+  st_as_sfc()
 
-m <- leaflet(data = pts) |>
-  addProviderTiles(provider = "OpenTopoMap") |>
-  addMarkers(lng = ~lon, lat = ~lat, label = ~name)
-mapshot(m, file = "utilities/overview-map.png")
+set_defaults(map_service = "esri", map_type = "world_hillshade")
+
+ggplot()+
+  basemap_gglayer(bb, verbose = FALSE)+
+  geom_sf(data = bb_gothic, fill = "transparent", color = "black",
+          linewidth = 1)+
+  geom_sf(data = pts, color = "blue")+
+  geom_label_repel(data = pts, aes(label = name, geometry = geometry),
+                   stat = "sf_coordinates",
+                   min.segment.length = 0)+
+  scale_fill_identity() +
+  ggtitle("Overview")+
+  coord_sf(expand = FALSE)+
+  theme(axis.title = element_blank())
+
+ggplot()+
+  basemap_gglayer(bb_gothic, verbose = FALSE)+
+  geom_sf(data = pts, color = "blue")+
+  geom_label_repel(data = pts, aes(label = name, geometry = geometry),
+                   stat = "sf_coordinates", min.segment.length = 0,
+                   max.overlaps = 100)+
+  scale_fill_identity() +
+  ggtitle("Inset: Gothic corridor")+
+  coord_sf(xlim = st_bbox(bb_gothic)[c("xmin", "xmax")],
+           ylim = st_bbox(bb_gothic)[c("ymin", "ymax")],
+           expand = FALSE)+
+  theme(axis.title = element_blank())
 ```
-![Overview map of all survey mark points.](utilities/overview-map.png)
 
 ## Choosing an existing survey mark for your research site
 Four questions are useful when choosing a survey mark to use as a real-time base location:
