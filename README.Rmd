@@ -35,7 +35,7 @@ pts <- read_sf("current_mark-points.geojson") |>
 m <- leaflet(data = pts) |>
   addProviderTiles(provider = "OpenTopoMap") |>
   addMarkers(lng = ~lon, lat = ~lat, label = ~name)
-mapshot2(m, file = "utilities/overview-map.png")
+mapshot(m, file = "utilities/overview-map.png")
 ```
 ![Overview map of all survey mark points.](utilities/overview-map.png)
 

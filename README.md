@@ -88,12 +88,12 @@ stringent limits.
     heuristic is to use the line-of-sight rule: if the base and rover
     antennas can “see” each other and are within their nominal range, a
     radio signal should reliably pass between them. This repository
-    contains [line-of-sight viewsheds](2023_mark-viewsheds.geojson) for
-    an 8 km radius around each survey mark. These represent *estimates*
-    of where a pair of Emlid RS2 GNSS receivers could communicate using
-    their out-of-the-box configuration. They are intended to aid in
-    planning, and they should be validated in the field prior to
-    operational use.
+    contains [line-of-sight viewsheds](current_mark-viewsheds.geojson)
+    for an 8 km radius around each survey mark. These represent
+    *estimates* of where a pair of Emlid RS2 GNSS receivers could
+    communicate using their out-of-the-box configuration. They are
+    intended to aid in planning, and they should be validated in the
+    field prior to operational use.
 
 3.  Is the survey mark suitable for the mapping application? Survey
     marks in this database vary tremendously in…
@@ -223,12 +223,13 @@ of interest](utilities/AOI.geojson) (also available as a Shapefile in
 encompasses the set of 10km-buffered survey marks.
 
 The raster file for the DEM is not provided in this repo due to its
-large size.
+large size, however reproducible code is available in
+`code/2_merge-dem.R`.
 
 #### 1.2. Calculating viewsheds
 
 The code needed to reproduce the viewsheds is provided in
-`code/2_mk_viewsheds.R`. The observer locations are the
+`code/3_mk_viewsheds.R`. The observer locations are the
 [current_mark-points](current_mark-points.geojson), and we assume that
 the base and the rover are both on a 2m range pole or tripod. The stock
 LoRA antenna range for [Emlid RS2+](https://emlid.com/reachrs2/)) is 8km
