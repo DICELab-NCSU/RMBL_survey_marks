@@ -25,7 +25,7 @@ library(basemaps)
 
 pts <- read_sf("current_mark-points.geojson") |>
   st_transform(crs = 3857)
-bb <- st_buffer(pts, dist = 10000) |>
+bb <- st_buffer(pts, dist = 8000) |>
   st_bbox() |>
   st_as_sfc()
 bb_gothic <- filter(pts, name %in% c("MexCut 3GPS", "Snodgrass TH",
@@ -42,8 +42,10 @@ ggplot()+
           linewidth = 1)+
   geom_sf(data = pts, color = "blue")+
   geom_label_repel(data = pts, aes(label = name, geometry = geometry),
-                   stat = "sf_coordinates",
-                   min.segment.length = 0)+
+                   size = 3, stat = "sf_coordinates",
+                   min.segment.length = 0, max.overlaps = 30)+
+  geom_sf_label(data = bb_gothic, aes(label = "Inset"), size = 4.5,
+               fontface = "bold")+
   scale_fill_identity() +
   ggtitle("Overview")+
   coord_sf(expand = FALSE)+
@@ -53,8 +55,8 @@ ggplot()+
   basemap_gglayer(bb_gothic, verbose = FALSE)+
   geom_sf(data = pts, color = "blue")+
   geom_label_repel(data = pts, aes(label = name, geometry = geometry),
-                   stat = "sf_coordinates", min.segment.length = 0,
-                   max.overlaps = 100)+
+                   size = 3, stat = "sf_coordinates",
+                   min.segment.length = 0, max.overlaps = 100)+
   scale_fill_identity() +
   ggtitle("Inset: Gothic corridor")+
   coord_sf(xlim = st_bbox(bb_gothic)[c("xmin", "xmax")],
