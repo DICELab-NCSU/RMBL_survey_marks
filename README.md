@@ -42,9 +42,9 @@ Emlid provides a brief overview and animation demonstrating how RTK
 works
 [here](https://docs.emlid.com/reachrs2/rtk-quickstart/rtk-introduction/).
 
-## Maps of survey marks
+## Maps of survey marks and estimated LoRa coverage
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
+![](README_files/figure-gfm/maps-1.png)<!-- -->![](README_files/figure-gfm/maps-2.png)<!-- -->
 
 ## Choosing an existing survey mark for your research site
 
@@ -125,21 +125,21 @@ setups, it may be possible for multiple researchers to use the same
 correction stream from a single base. For marks established by an
 individual, we suggest contacting that individual to coordinate use of
 the mark. In most cases, the individual established the mark for their
-use in a particular location for which other exisiting marks were
+use in a particular location for which other existing marks were
 unsuitable, and it is included under their name on the Current Research
 Map. If you have set a mark, please ask that it be included on the
 Current Research Map under your name for as long as you are actively
 using it.
 
 Conflicts can also arise if multiple bases are broadcasting RTK
-corrections on the same frequency. It’s good practice to change the
-frequency your team uses to something different from the out-of-the-box
-default to minimize potential conflicts. The Science Director may have
-information on other researchers operating base stations near your
-research sites and may be able to help facilitate coordination between
-teams.
+corrections on the same LoRa frequency (902.0-928.0 MHz). It’s good
+practice to change the frequency your team uses to something different
+from the out-of-the-box default to minimize potential conflicts. The
+Science Director may have information on other researchers operating
+base stations near your research sites and may be able to help
+facilitate coordination between teams.
 
-Longer term, there may be opportunites to set up a (semi)permanent base
+Longer term, there may be opportunities to set up a (semi)permanent base
 unit to broadcast corrections that cover a broad set of research sites
 with heavy demand for RTK. This will take a non-trivial amount of
 investment to set up and maintain. Alternatively, expansion of cellular
@@ -149,22 +149,22 @@ RTVRN](https://www.mesacoumenty.us/departments-and-services/gis/gps-survey)).
 
 ## Releases and update schedule
 
-The tentative plan is to relase a major version update once per year
-with minor releases on an irregular, as-needed basis. Major versions
-will be prepared during the low season of field station activity
-(September-May). The semantic versioning scheme will follow the pattern
-`vYYYY.m`. `YYYY` corresponds to the calendar year of *upcoming* growing
-season for which the major release is intended for use. `m` is the minor
-release version, which starts at 0 and increments by 1 for each minor
-release version.
+Releases will be named following a semantic versioning scheme that
+follows the pattern `vYYYY.p`. `YYYY` corresponds to the calendar year
+and `p` is the patch number which starts at 0 and increments by 1. The
+previous major/minor release schedule is no longer necessary since the
+scripting of the viewshed workflow in v2024.3.
 
-| Update                     | Major | Minor |
-|----------------------------|-------|-------|
-| Survey mark additions      | x     | x     |
-| Error corrections          | x     | x     |
-| Refined mark positions     | x     |       |
-| Updated viewshed           | x     |       |
-| Recovery/condition reports | x     |       |
+Update patches will be released on an as-needed basis, with the majority
+of activity occurring during the peak of field season activity
+(June-August). Updates will contain some combination of:
+
+- survey mark and viewshed additions
+- error corrections and improved mark position accuracy
+- recovery/condition reports
+
+The last patch for each calendar year will be submitted to the RMBL
+Current Research Map during the September-May “off-season.”
 
 ## Submit a mark recovery attempt report
 
@@ -174,38 +174,44 @@ report](https://github.com/DICELab-NCSU/RMBL_survey_marks/issues/new?assignees=&
 (links to an Issues template for this repository). Survey marks can move
 or be damaged and destroyed, rendering them inaccurate or unusable.
 These reports will be used to update the condition columns associated
-with each survey mark on an annual basis during the fall/winter/spring.
+with each survey mark.
 
 Users are encouraged to collect high precision position data during mark
 recovery attempts if they are able to do so. Most of the marks were
-established using older GPS/GNSS technologies and/or brief position
-recording durations. Collecting higher quality mark position data would
+established using older GPS/GNSS technologies and/or a brief position
+recording duration. Collecting higher quality mark position data would
 enable a broader suite of research applications, especially as the RMBL
 Spatial Data Platform comes online. Please contact the maintainer of
 this database if you are interested in providing mark position data.
 
 ## Submit a record of a new mark
 
-The proceedure to submit a new mark is currently under development.
-Please contact the Science Director if you are considering setting a new
-mark to aid your research. Will Petry can offer tips for identifying a
-suitable location. If you have set a mark for your research and would
-like to contribute it to the database, please open an ‘Issue’ at the top
-of this page.
+The procedure to submit a new mark is currently under development.
+Please contact the Science Director to arrange appropriate permissions
+if you are considering setting a new mark to aid your research. If you
+have set a mark for your research and would like to contribute it to the
+database, please open an ‘Issue’ at the top of this page.
 
 ## Technical documentation
 
 ### 1. Viewshed analysis
 
-Viewsheds for each survey mark were estimated using the [`viewscape`
-package](https://doi.org/10.32614/CRAN.package.viewscape) v.1.0.0.
+Viewsheds for each survey mark were estimated using the
+[`viewscape`](https://doi.org/10.32614/CRAN.package.viewscape) package
+v.2.0.2.
 
-#### 1.1. DEM pre-processing
+#### 1.1. DEM dataset and pre-processing
 
 Elevation data were sourced from the [USGS 3DEP 1/3rd arc-second Digital
 Elevation
 Models](https://www.sciencebase.gov/catalog/item/4f70aa9fe4b058caae3f8de5).
-The files required are:
+The on-the-ground resolution is ~8m, which smooths out small terrain
+features that, strictly speaking, blocks line of sight but does not
+prevent local radio communication. Processing speeds are expected to be
+~64× faster with this dataset compared to the highest available
+resolution DEM (~1m LiDAR).
+
+The USGS 3DEP DEM files required are:
 
 - USGS_13_n39w107_20220331.tif
 - USGS_13_n39w108_20220720.tif
@@ -234,5 +240,7 @@ suggests that 11km LOS may be feasible under ideal conditions.
 
 # Changelog
 
+- **2025-05-26**: Update release schedule based on viewshed workflow
+  changes in v2024.3.
 - **2024-07-04**: Viewshed workflow was moved from QGIS to R for
   efficiency.
