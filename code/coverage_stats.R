@@ -8,6 +8,9 @@ library(tidyverse)
 library(sf)
 library(httr)
 library(units)
+library(arcgis)
+
+tkn <- auth_user()
 
 ##################################################-
 ## Load spatial data ----
@@ -17,17 +20,9 @@ vs_poly_8km <- st_read("current_mark-viewsheds-8km.geojson")
 vs_agg_8km <- st_union(vs_poly_8km)
 
 # RMBL Research Map (query public version)
-url <- parse_url("https://services8.arcgis.com/jOS5YDdMN6EQxI1b/arcgis/rest/services")
-url$path <- paste(url$path, "ResearchSites_Public_2024/FeatureServer/60/query",
-                  sep = "/")
-url$query <- list(where = "FID > 0",
-                  outFields = "*",
-                  returnGeometry = "true",
-                  f = "geojson")
-request <- build_url(url)
-
-research <- st_read(request, quiet = TRUE) |>
-  st_transform(crs = st_crs(vs_poly_8km))
+research <- arc_read("https://services8.arcgis.com/jOS5YDdMN6EQxI1b/arcgis/rest/services/ResearchSites_2025/FeatureServer/147", token = tkn) |>
+  st_transform(crs = st_crs(vs_poly_8km)) |>
+  st_make_valid()
 
 research_agg <- st_union(research)
 
