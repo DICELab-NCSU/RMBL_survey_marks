@@ -44,6 +44,7 @@ vs_poly_8km <- mclapply(vs_8km, visualize_viewshed, outputtype = "polygon",
   select(-lyr.1) |>
   st_transform(crs = 32613)
 
+file.remove("current_mark-viewsheds-8km.geojson")
 st_write(vs_poly_8km, "current_mark-viewsheds-8km.geojson")
 
 # 11km antenna range
@@ -58,4 +59,5 @@ vs_poly_11km <- mclapply(vs_11km, visualize_viewshed, outputtype = "polygon",
   select(-lyr.1) |>
   st_transform(crs = 32613)
 
+file.remove("current_mark-viewsheds-11km.geojson")
 st_write(vs_poly_11km, "current_mark-viewsheds-11km.geojson")

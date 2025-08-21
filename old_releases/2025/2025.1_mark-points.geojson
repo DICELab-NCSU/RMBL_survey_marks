@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "current_mark-points",
+"name": "2025.1_mark-points",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32613" } },
 "features": [
 { "type": "Feature", "properties": { "name": "Beaver Creek", "installed": 2024.0, "installer": "W Petry", "type": "magnail in bedrock", "position_quality": "FIX", "lat_dd": 38.36286275, "lon_dd": -106.9309833, "latest_recovery": null, "recovered_by": null, "found_mark": null, "stability": "high", "condition": null }, "geometry": { "type": "Point", "coordinates": [ 331296.185869366745465, 4247841.390886798501015 ] } },

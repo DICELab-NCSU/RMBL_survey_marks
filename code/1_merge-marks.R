@@ -48,7 +48,8 @@ petry <- read_csv("raw-marks/PETRY/Survey Marks.csv") |>
   drop_na(Longitude, Latitude) |>
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) |>
   rename(name = Name) |>
-  filter(!str_detect(name, "^TEMP")) |>
+  filter(!str_detect(name, "^TEMP"),
+         !str_detect(name, "DEPRECATED")) |>
   arrange(name, `Lateral RMS`) |>
   group_by(name) |>
   slice(1) |>
@@ -101,11 +102,12 @@ current_monuments_recover <- current_monuments %>%
 ## Write out ----
 ##################################################-
 # current release (main directory)
+file.remove("current_mark-points.geojson")
 write_sf(current_monuments_recover, "current_mark-points.geojson", append = FALSE)
 
 # archive copy
 cyear <- year(today())
-cvers <- 3
+cvers <- 1
 dir.create(paste0("old_releases/", cyear))
 write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear, ".", cvers,
                                    "_mark-points.geojson"),
@@ -114,5 +116,6 @@ write_sf(current_monuments_recover, paste0("old_releases/", cyear, "/", cyear, "
 aoi <- st_buffer(current_monuments, dist = 10000) %>%
   st_bbox() %>%
   st_as_sfc()
+file.remove("utilities/AOI.geojson")
 write_sf(aoi, "utilities/AOI.geojson", append = FALSE)
 write_sf(aoi, "utilities/AOI.shp", append = FALSE)
